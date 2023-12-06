@@ -20,7 +20,7 @@ export default function UserCart() {
       />
       <ScrollView style={styles.contentContainer}>
         {cartItems.map((item) => (
-          <ShoeCard key={item.id} item={item} type="cart" />
+          <ShoeCard key={item.cartItemId} item={item} type="cart" />
         ))}
       </ScrollView>
     </View>

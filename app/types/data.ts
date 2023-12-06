@@ -7,3 +7,12 @@ export type Shoe = {
   sizes: SIZE[];
   id: string;
 };
+
+export type CartItem = {
+  name: string;
+  price: string;
+  description: string;
+  size: SIZE[];
+  id: string;
+  cartItemId: string;
+};

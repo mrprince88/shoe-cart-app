@@ -5,16 +5,17 @@ import { useNavigation } from "@react-navigation/native";
 import { NavigationProp } from "@react-navigation/native";
 import Icon from "app/components/Icon";
 import UserCartContext from "app/context/UserCartContext";
+import uuid from "react-native-uuid";
 
 import { getLocalStoreData, setLocalStoreData } from "app/utils/localStorage";
-import { PAGE, RootStackParamList, Shoe } from "app/types";
+import { PAGE, RootStackParamList, Shoe, CartItem } from "app/types";
 import styles from "./styles";
 
 export default function ShoeCard({
   item,
   type = "admin",
 }: {
-  item: Shoe;
+  item: CartItem | Shoe;
   type: "user" | "admin" | "cart";
 }) {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
@@ -27,7 +28,9 @@ export default function ShoeCard({
   };
 
   const handleCartItemDelete = async () => {
-    const newItems = cartItems.filter((i: any) => i.id !== item.id);
+    const newItems = cartItems.filter(
+      (i: CartItem) => i.cartItemId !== item.cartItemId
+    );
     setCartItems(newItems);
   };
 
@@ -79,7 +82,10 @@ export default function ShoeCard({
               <Pressable
                 style={styles.addBtn}
                 onPress={() => {
-                  setCartItems([...cartItems, item]);
+                  setCartItems([
+                    ...cartItems,
+                    { ...item, cartItemId: uuid.v4() },
+                  ]);
                 }}
               >
                 <Text style={styles.addBtnText}>Add to cart</Text>

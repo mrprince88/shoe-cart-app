@@ -1,5 +1,4 @@
-import { createContext, useState } from "react";
-import { Shoe } from "app/types";
+import { createContext } from "react";
 
 type UserCartContextType = {
   cartItems: any[];

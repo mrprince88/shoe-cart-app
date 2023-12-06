@@ -10,6 +10,19 @@
     "preview": {
       "distribution": "internal"
     },
+    "staging": {
+      "releaseChannel": "staging",
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk",
+        "image": "latest"
+      },
+      "ios": {
+        "cocoapods": "1.11.2",
+        "enterpriseProvisioning": "adhoc",
+        "resourceClass": "m-medium"
+      }
+    },
     "production": {}
   },
   "submit": {

@@ -29,7 +29,11 @@ export default function UserHome({ navigation }: UserHomeScreenNavigationProp) {
     <View style={{ ...styles.container, paddingTop: insets.top }}>
       <ModalHeader
         title="User Home"
-        left={<Icon name="close" />}
+        left={
+          <Pressable onPress={() => navigation.goBack()}>
+            <Icon name="close" />
+          </Pressable>
+        }
         right={
           <Pressable onPress={() => navigation.navigate(PAGE.USER_CART)}>
             <Icon name="shopping-bag" />
@@ -42,7 +46,7 @@ export default function UserHome({ navigation }: UserHomeScreenNavigationProp) {
         }
       />
       <ScrollView style={styles.contentContainer}>
-        {items.map((item) => (
+        {items?.map((item) => (
           <ShoeCard key={item.id} item={item} type="user" />
         ))}
       </ScrollView>

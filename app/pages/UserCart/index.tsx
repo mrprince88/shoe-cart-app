@@ -4,11 +4,12 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import ShoeCard from "app/components/ShoeCard";
 import ModalHeader from "app/components/ModalHeader";
-import { ScrollView, View } from "react-native";
+import { Pressable, ScrollView, View } from "react-native";
 import Icon from "app/components/Icon";
 import styles from "./styles";
+import { UserCartScreenNavigationProp } from "app/types";
 
-export default function UserCart() {
+export default function UserCart({ navigation }: UserCartScreenNavigationProp) {
   const { cartItems } = useContext(UserCartContext);
   const insets = useSafeAreaInsets();
 
@@ -16,10 +17,14 @@ export default function UserCart() {
     <View style={{ ...styles.container, paddingTop: insets.top }}>
       <ModalHeader
         title="User Cart"
-        left={<Icon name="chevron-left-large" />}
+        left={
+          <Pressable onPress={() => navigation.goBack()}>
+            <Icon name="chevron-left-large" />
+          </Pressable>
+        }
       />
       <ScrollView style={styles.contentContainer}>
-        {cartItems.map((item) => (
+        {cartItems?.map((item) => (
           <ShoeCard key={item.cartItemId} item={item} type="cart" />
         ))}
       </ScrollView>

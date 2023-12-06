@@ -40,13 +40,23 @@ export default function AddItem({
 
   const handleSave = async () => {
     const items = await getLocalStoreData("items");
-    const newItems = [
-      ...items.filter((item: any) => item.id !== itemId),
-      {
+    let newItems = items || [];
+    if (itemId) {
+      newItems = items.map((item: Shoe) => {
+        if (item.id === itemId) {
+          return {
+            ...item,
+            ...form,
+          };
+        }
+        return item;
+      });
+    } else {
+      newItems.push({
         ...form,
-        id: itemId || uuid.v4(),
-      },
-    ];
+        id: uuid.v4(),
+      });
+    }
     await setLocalStoreData("items", newItems);
     navigation.goBack();
   };
